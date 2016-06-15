@@ -73,6 +73,7 @@ add_definitions("-DWMOPS=0" "-DG192BITSTREAM=0")
 
 if(MSVC)
 	list(APPEND BV16_SOURCE_FILES bv16.def)
+	set_source_files_properties(bv16/g192.c PROPERTIES COMPILE_FLAGS "/wd4267") # Disable "possible loss of data" warning
 endif(MSVC)
 
 set(LIBS )
