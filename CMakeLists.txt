@@ -23,7 +23,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(BV16 VERSION 2.1 LANGUAGES C)
- 
+
 include_directories(${CMAKE_BINARY_DIR} ./bv16)
 include_directories(${CMAKE_BINARY_DIR} ./bvcommon)
 
@@ -67,6 +67,9 @@ set(BROADVOICE16_SOURCE_FILES
 	bv16/bv.c
 	bv16/g192.c
 )
+
+# Levinson method conflicts with AMRWB, so renaming this one
+add_definitions("-DLevinson=bv16_Levinson")
 
 add_definitions("-DWMOPS=0" "-DG192BITSTREAM=0")
 
