@@ -29,6 +29,7 @@ include_directories(${CMAKE_BINARY_DIR} ./bvcommon)
 
 option(ENABLE_SHARED "Build shared library." YES)
 option(ENABLE_STATIC "Build static library." YES)
+option(ENABLE_TOOLS "Build tools." NO)
 
 
 find_library(LIBM NAMES m)
@@ -114,29 +115,32 @@ if(ENABLE_SHARED)
 	endif()
 endif()
 
-add_executable(BroadVoice16 ${BROADVOICE16_SOURCE_FILES})
-if(ENABLE_SHARED)
-	target_link_libraries(BroadVoice16 bv16)
-else()
-	target_link_libraries(BroadVoice16 bv16-static)
-endif()
-if (NOT IOS)
-	install(TARGETS BroadVoice16
-	  RUNTIME DESTINATION bin
-	  LIBRARY DESTINATION lib
-	  ARCHIVE DESTINATION lib
-	  PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
-	)
+if(ENABLE_TOOLS)
+	add_executable(BroadVoice16 ${BROADVOICE16_SOURCE_FILES})
+	if(ENABLE_SHARED)
+		target_link_libraries(BroadVoice16 bv16)
+	else()
+		target_link_libraries(BroadVoice16 bv16-static)
+	endif()
+	if (NOT IOS)
+		install(TARGETS BroadVoice16
+			RUNTIME DESTINATION bin
+			LIBRARY DESTINATION lib
+			ARCHIVE DESTINATION lib
+			PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+		)
+	endif()
 endif()
 
 file(GLOB BV16_HEADER_FILES "bv16/*.h")
 install(FILES ${BV16_HEADER_FILES}
-  DESTINATION include/bv16-floatingpoint/bv16
-  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+	DESTINATION include/bv16-floatingpoint/bv16
+	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
 file(GLOB BV16_COMMON_HEADER_FILES "bvcommon/*.h")
 install(FILES ${BV16_COMMON_HEADER_FILES}
-  DESTINATION include/bv16-floatingpoint/bvcommon
-  PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+	DESTINATION include/bv16-floatingpoint/bvcommon
+	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
+
