@@ -15,7 +15,7 @@
 /* more details.  A copy of the LGPL is available at                         */
 /* http://www.broadcom.com/licenses/LGPLv2.1.php,                            */
 /* or by writing to the Free Software Foundation, Inc.,                      */
-/* 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.                 */
+/* 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.                 */
 /*****************************************************************************/
 
 
@@ -86,7 +86,7 @@ int   main(int argc, char **argv)
    fprintf(stderr,"/* more details.  A copy of the LGPL is available at                       */\n");
    fprintf(stderr,"/* http://www.broadcom.com/licenses/LGPLv2.1.php,                          */\n");
    fprintf(stderr,"/* or by writing to the Free Software Foundation, Inc.,                    */\n");
-   fprintf(stderr,"/* 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.               */\n");
+   fprintf(stderr,"/* 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.               */\n");
    fprintf(stderr,"/***************************************************************************/\n");
 
    if ((argc!=4)&&(argc!=5)) usage(argv[0]);
