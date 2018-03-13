@@ -50,7 +50,7 @@ develop programs using the BV16 library.
 %setup -n %{name}-%{version}
 
 %build
-%{expand:%%%cmake_name} . -DCMAKE_BUILD_TYPE=@CMAKE_BUILD_TYPE@ -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} -DCMAKE_PREFIX_PATH:PATH=%{_prefix} -DENABLE_STATIC=NO
+%{expand:%%%cmake_name} . -DCMAKE_BUILD_TYPE=@CMAKE_BUILD_TYPE@ -DCMAKE_INSTALL_LIBDIR:PATH=%{_libdir} -DCMAKE_PREFIX_PATH:PATH=%{_prefix}
 make %{?_smp_mflags}
 
 %install
@@ -69,11 +69,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_libdir}/*.so
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*/*/*.h
+%if @ENABLE_STATIC@
+%{_libdir}/*.a
+%endif
+%if @ENABLE_SHARED@
+%{_libdir}/*.so
+%endif
 
 %changelog
 * Tue Mar 13 2018 ronan.abhamon <ronan.abhamon@belledonne-communications.com>
