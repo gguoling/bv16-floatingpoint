@@ -1,6 +1,6 @@
 ############################################################################
 # CMakeLists.txt
-# Copyright (C) 2016  Belledonne Communications, Grenoble France
+# Copyright (C) 2016-2018  Belledonne Communications, Grenoble France
 #
 ############################################################################
 #
@@ -23,6 +23,8 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(BV16 VERSION 2.1 LANGUAGES C)
+
+include(GNUInstallDirs)
 
 include_directories(${CMAKE_BINARY_DIR} ./bv16)
 include_directories(${CMAKE_BINARY_DIR} ./bvcommon)
@@ -90,9 +92,9 @@ if(ENABLE_STATIC)
 	set_target_properties(bv16-static PROPERTIES OUTPUT_NAME bv16)
 	target_link_libraries(bv16-static ${LIBS})
 	install(TARGETS bv16-static
-		RUNTIME DESTINATION bin
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
+		RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+		LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+		ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 		PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 	)
 endif()
@@ -100,9 +102,9 @@ if(ENABLE_SHARED)
 	add_library(bv16 SHARED ${BV16_SOURCE_FILES})
 	target_link_libraries(bv16 ${LIBS})
 	install(TARGETS bv16
-		RUNTIME DESTINATION bin
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
+		RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+		LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+		ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 		PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 	)
 	if(MSVC)
@@ -124,9 +126,9 @@ if(ENABLE_TOOLS)
 	endif()
 	if (NOT IOS)
 		install(TARGETS BroadVoice16
-			RUNTIME DESTINATION bin
-			LIBRARY DESTINATION lib
-			ARCHIVE DESTINATION lib
+			RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+			LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+			ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 			PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 		)
 	endif()
@@ -144,3 +146,4 @@ install(FILES ${BV16_COMMON_HEADER_FILES}
 	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
+add_subdirectory(build)
