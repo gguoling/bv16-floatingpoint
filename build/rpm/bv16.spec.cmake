@@ -69,15 +69,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+%if @ENABLE_SHARED@
+%{_libdir}/*.so
+%endif
 
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/*/*/*.h
 %if @ENABLE_STATIC@
 %{_libdir}/*.a
-%endif
-%if @ENABLE_SHARED@
-%{_libdir}/*.so
 %endif
 
 %changelog
