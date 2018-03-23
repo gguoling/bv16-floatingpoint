@@ -3,12 +3,12 @@
 %define _prefix    @CMAKE_INSTALL_PREFIX@
 %define pkg_prefix @BC_PACKAGE_NAME_PREFIX@
 
-%define build_number @PROJECT_VERSION@
+%define build_number 1
 
 
 Name:           @CPACK_PACKAGE_NAME@
 Version:        @PROJECT_VERSION@
-Release:        %{?dist}
+Release:        %{build_number}%{?dist}
 Summary:        BroadVoice(R)16 (BV16)
 
 
